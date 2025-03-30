@@ -1,0 +1,19 @@
+{
+    "data":
+        {
+            "edges": [
+                {"id": "apple <-> pear",            "weight": 1},
+                {"id": "apple <-> orange",          "weight": 1},
+                {"id": "pear <-> orange",           "weight": 1},
+                {"id": "orange <-> grapefruit",     "weight": 1},
+                {"id": "peach <-> grapefruit",      "weight": 1},
+                {"id": "peach <-> blueberry",       "weight": 1},
+                {"id": "blueberry <-> grapefruit",  "weight": 1}
+            ]},
+    "data_process_operation": {
+        "name": "partition",
+        "parameters": {
+            "groups": 2
+        }
+    }
+}
