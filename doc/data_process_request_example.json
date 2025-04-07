@@ -1,19 +1,86 @@
 {
-    "data":
-        {
-            "edges": [
-                {"id": "apple <-> pear",            "weight": 1},
-                {"id": "apple <-> orange",          "weight": 1},
-                {"id": "pear <-> orange",           "weight": 1},
-                {"id": "orange <-> grapefruit",     "weight": 1},
-                {"id": "peach <-> grapefruit",      "weight": 1},
-                {"id": "peach <-> blueberry",       "weight": 1},
-                {"id": "blueberry <-> grapefruit",  "weight": 1}
-            ]},
-    "data_process_operation": {
-        "name": "partition",
-        "parameters": {
-            "groups": 2
-        }
+    "graph": {
+        "directed": "false",
+        "label": "Produce relationships",
+        "nodes": {
+            "pear": {
+                "label": "Pear"
+            },
+            "apple": {
+                "label": "Apple"
+            },
+            "orange": {
+                "label": "Orange"
+            },
+            "grapefruit": {
+                "label": "Grapefruit"
+            },
+            "peach": {
+                "label": "Peach"
+            },
+            "blueberry": {
+                "label": "Blueberry"
+            }
+        },
+        "edges": [
+            {
+                "source": "apple",
+                "target": "pear",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "apple",
+                "target": "orange",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "pear",
+                "target": "orange",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "orange",
+                "target": "grapefruit",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "peach",
+                "target": "grapefruit",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "peach",
+                "target": "blueberry",
+                "metadata": {
+                    "weight": 1
+                }
+            },
+            {
+                "source": "blueberry",
+                "target": "grapefruit",
+                "metadata": {
+                    "weight": 1
+                }
+            }
+        ]
+    },
+    "metadata": {
+        "data_process_operation": {
+            "name": "partition",
+            "parameters": {
+                "groups": 2
+            }
+        },
+        "notes": "This graph is two groups of 3 fruits connected by a single edge. (apple, pear, orange) <----> (grapefruit, peach, blueberry)"
     }
 }
