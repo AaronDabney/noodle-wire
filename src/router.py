@@ -1,6 +1,6 @@
-from operations.partition import partition_graph
-from operations.spectral_drawing import spectral_drawing
-from util.pydantic_models import Noodle_Request
+from src.operations.partition import partition_graph
+from src.operations.spectral_drawing import spectral_drawing
+from src.util.pydantic_models import Noodle_Request
 
 operationMap = {
     "partition": partition_graph,

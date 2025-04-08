@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from util.pydantic_models import Noodle_Request
-import router
+from src.util.pydantic_models import Noodle_Request
+import src.router as router
 
 app = FastAPI()
 

@@ -1,8 +1,8 @@
 import numpy as np
 import scipy
 from sklearn.cluster import KMeans
-import util.matrix_util as mut
-import util.graph_converter as graph_converter
+import src.util.matrix_util as mut
+import src.util.graph_converter as graph_converter
 
 def partition_graph(graph, num_groups):
     a_matrix, node_labels = graph_converter.graph_to_adjacency_matrix(graph)

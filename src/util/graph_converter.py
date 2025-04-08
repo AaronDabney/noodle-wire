@@ -1,5 +1,5 @@
 import numpy as np
-from util.pydantic_models import Graph
+from src.util.pydantic_models import Graph
 
 def _convert_graph_to_dict(graph):
     """Helper function to convert Pydantic Graph to dictionary format."""
