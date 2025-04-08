@@ -5,7 +5,6 @@ import router
 
 app = FastAPI()
 
-
 @app.get("/")
 async def get():
     return {"note": "Processing requests must use POST"}
@@ -13,10 +12,9 @@ async def get():
 @app.post("/")
 async def post(noodle_request: Noodle_Request):
     try:
-        print("Trying")
         result = router.process_request(noodle_request)
     except Exception as e:
         print(f"Processor Error: {str(e)}")
-        return {"Error": "processor error"}
+        return {"Error": "Processor Error"}
     else:
         return result

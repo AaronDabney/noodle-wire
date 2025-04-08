@@ -2,31 +2,6 @@ import numpy as np
 import math 
 import copy
 
-def edges_to_matrix(edges):
-    node_set = set()
-
-    for edge in edges:
-        a, b = edge["id"].split(' <-> ')
-        node_set.add(a)
-        node_set.add(b)
-
-    node_labels = list(node_set)
-
-    index_map = {}
-    for index, node_name in enumerate(node_labels):
-        index_map[node_name] = index
-
-    size = len(node_labels)
-    matrix = np.zeros((size, size))
-
-    for edge in edges:
-        a_index, b_index = list(map(lambda x: index_map[x], edge["id"].split(' <-> ')))
-        weight = edge["weight"]
-        matrix[a_index, b_index] = weight
-        matrix[b_index, a_index] = weight
-
-    return matrix, node_labels
-
 def build_affinity_matrix(adjacency_matrix, sigma=1):
     shape = adjacency_matrix.shape
     num_rows, num_cols = shape
@@ -71,6 +46,7 @@ def build_degree_matrix(input_matrix):
 
 # If two eigen vectors share an eigenvalue remove the one that occurs later 
 # preserving earliest occurence
+# TODO: This is a hack, we should use a better method
 def build_orthogonal_eigen_matrix(eigen_data, threshold = 0.01):
     eigen_values, eigen_matrix = eigen_data
     remove_indices = set()
