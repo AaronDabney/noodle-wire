@@ -1,20 +1,24 @@
 from operations.partition import partition_graph
 from operations.spectral_drawing import spectral_drawing
+from util.pydantic_models import Noodle_Request
 
 operationMap = {
     "partition": partition_graph,
     "spectral_drawing": spectral_drawing
 }
 
-def process_request(data_process_request):
-    data, data_process_operation = vars(data_process_request).values()
-    options = data_process_operation.parameters
-    operation = operationMap[data_process_operation.name]
+def process_request(request: Noodle_Request):
+
+    graph = request.graph
+    data_process_operation = request.metadata["data_process_operation"]
+    options = data_process_operation["parameters"]
+    operation = operationMap[data_process_operation["name"]]
+
 
     try:
-        result = operation(*data.values(), *options.values())
-    except:
-        print("Data Operation Error")
-        return {"error": "Data Operation Error"}
+        result = operation(graph, *options.values())
+    except Exception as e:
+        print(f"Data Operation Error: {str(e)}")
+        return {"error": f"Data Operation Error: {str(e)}"}
     else:
         return result

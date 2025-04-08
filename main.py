@@ -12,14 +12,11 @@ async def get():
 
 @app.post("/")
 async def post(noodle_request: Noodle_Request):
-    print("Debug START")
-    print(noodle_request)
-    print("Debug STOP")
     try:
         print("Trying")
         result = router.process_request(noodle_request)
-    except:
-        print("Processor Error")
+    except Exception as e:
+        print(f"Processor Error: {str(e)}")
         return {"Error": "processor error"}
     else:
         return result
