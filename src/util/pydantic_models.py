@@ -33,10 +33,10 @@ class Edge(BaseModel):
     metadata: Edge_MetaData
 
 class Graph(BaseModel):
-    directed: bool | None # string?
+    directed: bool
     label: str
-    nodes: Dict[str, Node] | None
-    edges: list[Edge] = []
+    nodes: Dict[str, Node]
+    edges: list[Edge]
 
 class Noodle_Request(BaseModel):
     graph: Graph
