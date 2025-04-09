@@ -1,20 +1,18 @@
 import numpy as np
 from src.util.pydantic_models import Graph
 
-def _process_edge(edge, graph, adj_list):
-    source, target = edge.source, edge.target
-    weight = edge.metadata.weight
-    
-    adj_list[source].append((target, weight))
-    if not graph.directed:
-        adj_list[target].append((source, weight))
 
 def graph_to_adjacency_list(graph):
     adj_list = {node_id: [] for node_id in graph.nodes.keys()}
     
     for edge in graph.edges:
-        _process_edge(edge, graph, adj_list)
-    
+        source, target = edge.source, edge.target
+        weight = edge.metadata.weight
+        adj_list[source].append((target, weight))
+
+        if not graph.directed:
+            adj_list[target].append((source, weight))
+
     return adj_list
 
 def graph_to_adjacency_matrix(graph):
