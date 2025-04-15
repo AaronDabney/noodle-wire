@@ -1,5 +1,8 @@
 import numpy as np
 import scipy
+import scipy.linalg
+import scipy.sparse
+import scipy.sparse.linalg
 from sklearn.cluster import KMeans
 import src.util.matrix_util as mut
 import src.util.graph_converter as graph_converter
@@ -14,15 +17,14 @@ def partition_graph(graph, num_groups):
     laplacian = np.matmul(d_i, np.matmul(affinity_matrix, d_i))
 
     # Eigen data
-    eigen_data = np.linalg.eigh(laplacian)
-    ortho_eigen_matrix = mut.build_orthogonal_eigen_matrix(eigen_data)
-    row_num, col_num = ortho_eigen_matrix.shape
+    eigen_values, eigen_matrix = scipy.linalg.eigh(laplacian)
 
-    sampled_eigen_matrix = mut.sample_range_of_columns(ortho_eigen_matrix, col_num - num_groups, col_num)
-    normalized_eigen_matrix = mut.normalized_matrix_rows(sampled_eigen_matrix)
+    row_num, col_num = eigen_matrix.shape
+
+    sampled_eigen_matrix = mut.sample_range_of_columns(eigen_matrix, col_num - num_groups, col_num)
 
     # Clustering
-    kmeans = KMeans(n_clusters=num_groups).fit(normalized_eigen_matrix)
+    kmeans = KMeans(n_clusters=num_groups).fit(sampled_eigen_matrix)
 
     # Labeling
     group_mapping = {}

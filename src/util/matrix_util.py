@@ -43,32 +43,7 @@ def build_degree_matrix(input_matrix):
 
     return output
 
-
-# If two eigen vectors share an eigenvalue remove the one that occurs later 
-# preserving earliest occurence
-# TODO: This is a hack, we should use a better method
-def build_orthogonal_eigen_matrix(eigen_data, threshold = 0.01):
-    eigen_values, eigen_matrix = eigen_data
-    remove_indices = set()
-
-    for i in range(len(eigen_values)):
-        for j in range(i + 1, len(eigen_values)):
-            difference = abs(eigen_values[i] - eigen_values[j])
-            if difference < threshold:
-                remove_indices.add(i)
-
-    remove_indices = list(remove_indices)
-    remove_indices.sort(reverse=True)
-
-    output = copy.deepcopy(eigen_matrix)
-
-    for index in remove_indices: 
-        output = np.delete(output, index, axis=1)
-
-    return output
-
-# Start and end inclusive [start, end]
-# zero indexed
+# Start and end inclusive [start, end] (zero indexed)
 def sample_range_of_columns(matrix, start, end):
     return matrix[:,start:end + 1]
 
@@ -82,3 +57,14 @@ def normalized_matrix_rows(matrix_input):
             matrix[y][x] = item / length
 
     return matrix
+
+def normalize_matrix_by_longest_row(matrix):
+    row_norms = np.linalg.norm(matrix, axis=1)
+    max_norm = np.max(row_norms)
+
+    if max_norm == 0:
+        return matrix
+    
+    normalized_matrix = matrix / max_norm
+    
+    return normalized_matrix
